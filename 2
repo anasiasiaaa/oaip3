@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cmath>
+#include <cstdio>
+#include <clocale>
+
+double calculateFunction(double x, double y) {
+    if (x == y) { //проверка деления на ноль
+        return NAN; //вернем "не число", чтобы обозначить ошибку(через ошибку выведем деление на 0)
+    }
+    return (x * x + y / 3.0 + 7) / (x - y);
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    double xStart, xEnd, xStep;
+    double yStart, yEnd, yStep;
+
+    //ввод начальных и конечных значений для x и y, а также шагов
+    printf("Введите начальное значение x: ");
+    scanf_s("%lf", &xStart);
+    printf("Введите конечное значение x: ");
+    scanf_s("%lf", &xEnd);
+    printf("Введите шаг для x: ");
+    scanf_s("%lf", &xStep);
+
+    printf("Введите начальное значение y: ");
+    scanf_s("%lf", &yStart);
+    printf("Введите конечное значение y: ");
+    scanf_s("%lf", &yEnd);
+    printf("Введите шаг для y: ");
+    scanf_s("%lf", &yStep);
+
+    //заголовок таблицы
+    printf("%10s | %10s | %15s\n", "x", "y", "f(x, y)");
+    printf("----------------------------------------\n");
+
+    //вычисление значений функции в заданных диапазонах и вывод таблицы
+    for (double x = xStart; x <= xEnd; x += xStep) {
+        double y = yStart;
+        do {
+            double result = calculateFunction(x, y);
+            printf("%10.2f | %10.2f | ", x, y);
+            if (std::isnan(result)) { //проверка на "не число"
+                printf("%15s\n", "Деление на 0");
+            }
+            else {
+                printf("%15.2f\n", result);
+            }
+            y += yStep;
+        } while (y <= yEnd);
+    }
+
+    return 0;
+}
+
+
