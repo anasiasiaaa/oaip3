@@ -1,0 +1,28 @@
+#include <clocale>
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    double K, x, p, k;
+
+    cout << "Введите K: ";
+    cin >> K; //вводные данные К и х
+
+    cout << "Введите x: ";
+    cin >> x;
+
+    k = 1; //присвоение значений для к и р
+    p = 1; //инициализируем p единицей
+
+    while (k <= K) { //условие цикла 
+        p *= (pow(x, k) * log10(k * x)) / (k * k + k + 1); //умножаем p на следующее значение
+        k += 1; //увеличиваем k на 1 
+    }
+
+    cout << "Результат: " << p << endl; //выводим результат
+
+    return 0;
+}
